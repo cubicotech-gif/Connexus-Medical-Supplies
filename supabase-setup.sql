@@ -195,6 +195,15 @@ CREATE TRIGGER site_settings_updated_at
 -- ────────────────────────────────────────────────────────────
 -- 6. STORAGE BUCKET FOR SITE IMAGES
 -- ────────────────────────────────────────────────────────────
+-- This creates the "site-images" bucket via SQL.
+-- If this section errors, create it MANUALLY in Supabase:
+--   1. Go to Storage (left sidebar)
+--   2. Click "New Bucket"
+--   3. Name: site-images
+--   4. Toggle "Public bucket" ON
+--   5. Click "Create bucket"
+-- Then run ONLY the policy statements below (skip the INSERT).
+-- ────────────────────────────────────────────────────────────
 INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 VALUES (
   'site-images',
