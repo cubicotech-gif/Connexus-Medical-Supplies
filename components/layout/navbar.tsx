@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { usePathname } from 'next/navigation'
@@ -17,27 +17,59 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [logoError, setLogoError] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const pathname = usePathname()
   const logo = useSiteImage('logo')
   const showLogo = logo && !logoError
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY
+
+      // Show/hide on scroll direction
+      if (y > lastScrollY && y > 200) {
+        setHidden(true) // scrolling down past 200px — hide
+      } else {
+        setHidden(false) // scrolling up — show
+      }
+
+      setScrolled(y > 50)
+      setLastScrollY(y)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Logo Bar */}
-      <div className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex justify-center">
-          <Link href="/">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        hidden ? '-translate-y-full' : 'translate-y-0'
+      }`}
+    >
+      {/* Logo Bar — glassmorphism */}
+      <div
+        className={`transition-all duration-300 ${
+          scrolled
+            ? 'bg-white/70 backdrop-blur-xl shadow-sm'
+            : 'bg-white/90 backdrop-blur-md'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex justify-center">
+          <Link href="/" className={`block transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'}`}>
             {showLogo ? (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={logo}
                 alt="Connexus Medical Supplies"
-                className="h-16 md:h-20 w-auto object-contain"
+                className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-14' : 'h-20 md:h-24'}`}
                 onError={() => setLogoError(true)}
               />
             ) : (
               <div className="text-center">
-                <div className="font-bold text-2xl md:text-3xl text-navy tracking-tight">
+                <div className={`font-bold text-navy tracking-tight transition-all duration-300 ${scrolled ? 'text-xl' : 'text-2xl md:text-3xl'}`}>
                   Connexus Medical
                 </div>
                 <div className="text-xs md:text-sm text-primary font-medium">
@@ -49,9 +81,15 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Pill Navigation */}
-      <div className="flex justify-center px-4 -mt-5">
-        <nav className="bg-navy/95 backdrop-blur-md rounded-full shadow-lg px-2 py-1">
+      {/* Pill Navigation — positioned below logo with proper spacing */}
+      <div className="flex justify-center px-4 py-2">
+        <nav
+          className={`rounded-full shadow-lg px-2 py-1.5 transition-all duration-300 ${
+            scrolled
+              ? 'bg-navy/80 backdrop-blur-xl'
+              : 'bg-navy/95 backdrop-blur-md'
+          }`}
+        >
           <div className="hidden md:flex items-center gap-1">
             {links.map((link) => (
               <Link
@@ -86,8 +124,8 @@ export function Navbar() {
 
       {/* Mobile dropdown */}
       {open && (
-        <div className="md:hidden mx-4 mt-2">
-          <div className="bg-navy/95 backdrop-blur-md rounded-2xl shadow-lg p-4 space-y-1">
+        <div className="md:hidden mx-4 mt-1">
+          <div className="bg-navy/90 backdrop-blur-xl rounded-2xl shadow-lg p-4 space-y-1">
             {links.map((link) => (
               <Link
                 key={link.href}
