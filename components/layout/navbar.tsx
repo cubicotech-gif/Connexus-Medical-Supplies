@@ -1,10 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import { Heart, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { usePathname } from 'next/navigation'
+import { useSiteImage } from '@/lib/image-context'
 
 const links = [
   { href: '/', label: 'Home' },
@@ -16,19 +18,26 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const logo = useSiteImage('logo')
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <Heart className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <div className="font-bold text-lg text-gray-900">Connexus Medical</div>
-              <div className="text-xs text-gray-500">Quality Healthcare Solutions</div>
-            </div>
+            {logo ? (
+              <Image src={logo} alt="Connexus Medical" width={160} height={48} className="h-10 w-auto object-contain" />
+            ) : (
+              <>
+                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                  <Heart className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <div className="font-bold text-lg text-gray-900">Connexus Medical</div>
+                  <div className="text-xs text-gray-500">Quality Healthcare Solutions</div>
+                </div>
+              </>
+            )}
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

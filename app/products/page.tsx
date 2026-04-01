@@ -7,11 +7,44 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ArrowRight, CheckCircle, Phone } from 'lucide-react'
 import { products, companyInfo } from '@/lib/data'
+import { useSiteImage } from '@/lib/image-context'
+import type { ImageSlot } from '@/lib/storage'
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
+}
+
+function ProductCard({ product, index }: { product: { name: string; imageSlot: ImageSlot; description: string; features: string[] }; index: number }) {
+  const image = useSiteImage(product.imageSlot)
+  return (
+    <motion.div {...fadeUp} transition={{ delay: index * 0.15 }}>
+      <Card className="overflow-hidden hover:shadow-2xl transition-all h-full">
+        <div className="relative h-64">
+          <Image src={image} alt={product.name} fill className="object-cover" />
+        </div>
+        <div className="p-8">
+          <h3 className="text-2xl font-bold text-gray-900 mb-3">{product.name}</h3>
+          <p className="text-gray-600 leading-relaxed mb-5">{product.description}</p>
+          <div className="space-y-2 mb-6">
+            {product.features.map((feature, fi) => (
+              <div key={fi} className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                <span className="text-gray-700 text-sm">{feature}</span>
+              </div>
+            ))}
+          </div>
+          <Link href="/contact">
+            <Button className="w-full group">
+              Request a Quote
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+        </div>
+      </Card>
+    </motion.div>
+  )
 }
 
 export default function ProductsPage() {
@@ -48,38 +81,7 @@ export default function ProductsPage() {
 
             <div className="grid md:grid-cols-2 gap-10">
               {category.items.map((product, i) => (
-                <motion.div key={product.name} {...fadeUp} transition={{ delay: i * 0.15 }}>
-                  <Card className="overflow-hidden hover:shadow-2xl transition-all h-full">
-                    <div className="relative h-64">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-8">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-3">{product.name}</h3>
-                      <p className="text-gray-600 leading-relaxed mb-5">{product.description}</p>
-
-                      <div className="space-y-2 mb-6">
-                        {product.features.map((feature, fi) => (
-                          <div key={fi} className="flex items-center gap-2">
-                            <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                            <span className="text-gray-700 text-sm">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <Link href="/contact">
-                        <Button className="w-full group">
-                          Request a Quote
-                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </Card>
-                </motion.div>
+                <ProductCard key={product.name} product={product} index={i} />
               ))}
             </div>
           </div>
