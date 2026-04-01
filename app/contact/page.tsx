@@ -4,8 +4,9 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Loader2 } from 'lucide-react'
 import { companyInfo } from '@/lib/data'
+import { submitContactForm } from '@/lib/actions'
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -15,6 +16,8 @@ const fadeUp = {
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,9 +26,19 @@ export default function ContactPage() {
     message: '',
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
+    setSubmitting(true)
+    setSubmitError('')
+
+    const result = await submitContactForm(formData)
+
+    if (result.success) {
+      setSubmitted(true)
+    } else {
+      setSubmitError(result.error || 'Something went wrong. Please try again.')
+    }
+    setSubmitting(false)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -187,9 +200,18 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full group">
-                      <Send className="mr-2 h-5 w-5" />
-                      Send Message
+                    {submitError && (
+                      <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3 text-center">
+                        {submitError}
+                      </div>
+                    )}
+
+                    <Button type="submit" size="lg" className="w-full group" disabled={submitting}>
+                      {submitting ? (
+                        <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...</>
+                      ) : (
+                        <><Send className="mr-2 h-5 w-5" /> Send Message</>
+                      )}
                     </Button>
 
                     <p className="text-xs text-gray-500 text-center">
