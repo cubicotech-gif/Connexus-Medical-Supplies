@@ -51,7 +51,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="pt-40 pb-20 diagonal-gradient">
+      <section className="pt-52 pb-20 diagonal-gradient">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
