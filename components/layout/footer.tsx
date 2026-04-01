@@ -1,13 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import { useState } from 'react'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { companyInfo } from '@/lib/data'
 import { useSiteImage } from '@/lib/image-context'
 
 export function Footer() {
   const logo = useSiteImage('logo')
+  const [logoError, setLogoError] = useState(false)
+  const showLogo = logo && !logoError
 
   return (
     <footer className="bg-navy text-gray-300">
@@ -16,8 +18,14 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-4">
-              {logo ? (
-                <Image src={logo} alt="Connexus Medical Supplies" width={180} height={48} className="h-10 w-auto object-contain brightness-0 invert" />
+              {showLogo ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={logo}
+                  alt="Connexus Medical Supplies"
+                  className="h-10 w-auto object-contain max-w-[200px] brightness-0 invert"
+                  onError={() => setLogoError(true)}
+                />
               ) : (
                 <span className="font-bold text-white text-xl">Connexus Medical</span>
               )}
