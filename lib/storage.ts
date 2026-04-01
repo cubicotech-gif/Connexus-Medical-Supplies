@@ -41,74 +41,92 @@ export const IMAGE_SLOTS: { key: ImageSlot; label: string; section: string; desc
 ]
 
 // Upload an image to a specific slot
-export async function uploadImage(slot: ImageSlot, file: File): Promise<string | null> {
-  if (!supabase) return null
+export async function uploadImage(slot: ImageSlot, file: File): Promise<{ url: string | null; error: string | null }> {
+  if (!supabase) return { url: null, error: 'Supabase is not configured' }
 
-  const ext = file.name.split('.').pop()
+  const ext = file.name.split('.').pop()?.toLowerCase() || 'png'
   const path = `${slot}.${ext}`
 
-  // Remove old file first (ignore error if doesn't exist)
-  await supabase.storage.from(BUCKET).remove([path])
+  // Try to clean up old files first (don't fail if this errors)
+  try {
+    const exts = ['png', 'jpg', 'jpeg', 'webp', 'svg', 'ico', 'gif']
+    const oldPaths = exts.map(e => `${slot}.${e}`)
+    await supabase.storage.from(BUCKET).remove(oldPaths)
+  } catch {
+    // Ignore cleanup errors — old files might not exist
+  }
 
-  // Also remove other extensions for this slot
-  const exts = ['png', 'jpg', 'jpeg', 'webp', 'svg', 'ico']
-  const oldPaths = exts.map(e => `${slot}.${e}`).filter(p => p !== path)
-  await supabase.storage.from(BUCKET).remove(oldPaths)
-
+  // Upload the new file
   const { error } = await supabase.storage
     .from(BUCKET)
     .upload(path, file, { upsert: true, contentType: file.type })
 
   if (error) {
     console.error('Upload error:', error)
-    return null
+
+    // Provide helpful error messages
+    if (error.message?.includes('Bucket not found') || error.message?.includes('not found')) {
+      return { url: null, error: 'Storage bucket "site-images" not found. Create it in Supabase Dashboard → Storage → New Bucket (name: site-images, public: ON).' }
+    }
+    if (error.message?.includes('policy') || error.message?.includes('security')) {
+      return { url: null, error: 'Permission denied. Run the storage policies SQL in Supabase SQL Editor (see supabase-storage-policies.sql).' }
+    }
+    if (error.message?.includes('mime') || error.message?.includes('type')) {
+      return { url: null, error: 'File type not allowed. Use PNG, JPG, WEBP, SVG, or GIF.' }
+    }
+    if (error.message?.includes('size')) {
+      return { url: null, error: 'File too large. Maximum size is 5MB.' }
+    }
+
+    return { url: null, error: error.message || 'Upload failed. Check console for details.' }
   }
 
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(path)
-  return data.publicUrl
-}
-
-// Get the public URL for an image slot
-export async function getImageUrl(slot: ImageSlot): Promise<string | null> {
-  if (!supabase) return null
-
-  // List files in the bucket to find the one matching this slot
-  const { data: files } = await supabase.storage.from(BUCKET).list('', {
-    search: slot,
-  })
-
-  if (!files || files.length === 0) return null
-
-  const match = files.find(f => f.name.startsWith(slot + '.'))
-  if (!match) return null
-
-  const { data } = supabase.storage.from(BUCKET).getPublicUrl(match.name)
-  return data.publicUrl
+  return { url: data.publicUrl, error: null }
 }
 
 // Get all image URLs at once
 export async function getAllImageUrls(): Promise<Record<string, string>> {
   if (!supabase) return {}
 
-  const { data: files } = await supabase.storage.from(BUCKET).list()
-  if (!files) return {}
+  try {
+    const { data: files, error } = await supabase.storage.from(BUCKET).list('', {
+      limit: 100,
+      sortBy: { column: 'name', order: 'asc' },
+    })
 
-  const urls: Record<string, string> = {}
-  for (const file of files) {
-    const slot = file.name.replace(/\.[^.]+$/, '') // remove extension
-    const { data } = supabase.storage.from(BUCKET).getPublicUrl(file.name)
-    urls[slot] = data.publicUrl
+    if (error || !files) {
+      console.error('Failed to list images:', error)
+      return {}
+    }
+
+    const urls: Record<string, string> = {}
+    for (const file of files) {
+      // Skip empty placeholder files
+      if (file.name === '.emptyFolderPlaceholder') continue
+      const slot = file.name.replace(/\.[^.]+$/, '') // remove extension
+      const { data } = supabase.storage.from(BUCKET).getPublicUrl(file.name)
+      urls[slot] = data.publicUrl
+    }
+
+    return urls
+  } catch (err) {
+    console.error('Failed to load images:', err)
+    return {}
   }
-
-  return urls
 }
 
 // Delete an image from a slot
-export async function deleteImage(slot: ImageSlot): Promise<boolean> {
-  if (!supabase) return false
+export async function deleteImage(slot: ImageSlot): Promise<{ success: boolean; error: string | null }> {
+  if (!supabase) return { success: false, error: 'Supabase is not configured' }
 
-  const exts = ['png', 'jpg', 'jpeg', 'webp', 'svg', 'ico']
-  const paths = exts.map(e => `${slot}.${e}`)
-  const { error } = await supabase.storage.from(BUCKET).remove(paths)
-  return !error
+  try {
+    const exts = ['png', 'jpg', 'jpeg', 'webp', 'svg', 'ico', 'gif']
+    const paths = exts.map(e => `${slot}.${e}`)
+    const { error } = await supabase.storage.from(BUCKET).remove(paths)
+    if (error) return { success: false, error: error.message }
+    return { success: true, error: null }
+  } catch (err) {
+    return { success: false, error: 'Failed to delete image' }
+  }
 }

@@ -51,28 +51,36 @@ export default function AdminPage() {
     }
   }
 
+  const [errorSlot, setErrorSlot] = useState<{ slot: string; message: string } | null>(null)
+
   const handleUpload = async (slot: ImageSlot, file: File) => {
     setUploading(slot)
     setSuccessSlot(null)
+    setErrorSlot(null)
 
-    const url = await uploadImage(slot, file)
-    if (url) {
-      setImageUrls(prev => ({ ...prev, [slot]: url }))
+    const result = await uploadImage(slot, file)
+    if (result.url) {
+      setImageUrls(prev => ({ ...prev, [slot]: result.url! }))
       setSuccessSlot(slot)
       setTimeout(() => setSuccessSlot(null), 3000)
+    } else {
+      setErrorSlot({ slot, message: result.error || 'Upload failed' })
     }
     setUploading(null)
   }
 
   const handleDelete = async (slot: ImageSlot) => {
     if (!confirm(`Delete the image for "${slot}"? The site will revert to the default placeholder.`)) return
-    const ok = await deleteImage(slot)
-    if (ok) {
+    setErrorSlot(null)
+    const result = await deleteImage(slot)
+    if (result.success) {
       setImageUrls(prev => {
         const copy = { ...prev }
         delete copy[slot]
         return copy
       })
+    } else {
+      setErrorSlot({ slot, message: result.error || 'Delete failed' })
     }
   }
 
@@ -185,6 +193,7 @@ export default function AdminPage() {
                   defaultUrl={(DEFAULTS as Record<string, string>)[slot.key]}
                   isUploading={uploading === slot.key}
                   isSuccess={successSlot === slot.key}
+                  errorMessage={errorSlot?.slot === slot.key ? errorSlot.message : undefined}
                   onUpload={(file) => handleUpload(slot.key, file)}
                   onDelete={() => handleDelete(slot.key)}
                   disabled={!supabaseConnected}
@@ -229,6 +238,7 @@ function ImageUploadCard({
   defaultUrl,
   isUploading,
   isSuccess,
+  errorMessage,
   onUpload,
   onDelete,
   disabled,
@@ -238,6 +248,7 @@ function ImageUploadCard({
   defaultUrl?: string
   isUploading: boolean
   isSuccess: boolean
+  errorMessage?: string
   onUpload: (file: File) => void
   onDelete: () => void
   disabled: boolean
@@ -331,6 +342,12 @@ function ImageUploadCard({
               </a>
             )}
           </div>
+
+          {errorMessage && (
+            <div className="mt-2 bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg p-2">
+              {errorMessage}
+            </div>
+          )}
         </div>
       </div>
     </div>
