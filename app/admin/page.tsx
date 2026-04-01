@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import { IMAGE_SLOTS, uploadImage, deleteImage, getAllImageUrls, type ImageSlot } from '@/lib/storage'
-import { DEFAULTS } from '@/lib/image-context'
 import {
   Upload, Trash2, Check, X, LogIn, Eye, AlertCircle,
   Image as ImageIcon, Shield, Loader2,
@@ -190,7 +189,7 @@ export default function AdminPage() {
                   key={slot.key}
                   slot={slot}
                   currentUrl={imageUrls[slot.key]}
-                  defaultUrl={(DEFAULTS as Record<string, string>)[slot.key]}
+                  defaultUrl={undefined}
                   isUploading={uploading === slot.key}
                   isSuccess={successSlot === slot.key}
                   errorMessage={errorSlot?.slot === slot.key ? errorSlot.message : undefined}
