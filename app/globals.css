@@ -4,27 +4,33 @@
 
 @layer base {
   body {
-    @apply font-sans antialiased;
+    @apply font-sans antialiased text-gray-600;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #1E3A5F;
   }
 }
 
+/* ── Gradients ── */
 .diagonal-gradient {
-  background: linear-gradient(135deg, #E5F7FB 0%, #FFFFFF 50%, #F7FCFE 100%);
+  background: linear-gradient(135deg, #E0F7FF 0%, #FFFFFF 50%, #E8EDF3 100%);
 }
 
 .diagonal-gradient-blue {
-  background: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
+  background: linear-gradient(135deg, #00AFF0 0%, #0098D6 100%);
 }
 
+/* ── Badges ── */
 .badge-primary {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.75rem;
-  font-weight: 500;
-  background-color: #CCEFF7;
-  color: #006C82;
+  font-weight: 600;
+  background-color: #E0F7FF;
+  color: #00AFF0;
 }
 
 .badge-discount {
@@ -34,33 +40,38 @@
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 700;
-  background-color: #111827;
+  background-color: #1E3A5F;
   color: #ffffff;
 }
 
+/* ── Cards ── */
 .product-card {
   background-color: #ffffff;
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
   transition: all 0.3s;
 }
 
 .product-card:hover {
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  box-shadow: 0 20px 40px rgb(0 0 0 / 0.12);
 }
 
+/* ── Icon containers ── */
 .icon-container {
   width: 4rem;
   height: 4rem;
-  background-color: #CCEFF7;
+  background-color: #E0F7FF;
   border-radius: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* ── Glass ── */
 .glass {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }

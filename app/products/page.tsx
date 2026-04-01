@@ -20,12 +20,12 @@ function ProductCard({ product, index }: { product: { name: string; imageSlot: I
   const image = useSiteImage(product.imageSlot)
   return (
     <motion.div {...fadeUp} transition={{ delay: index * 0.15 }}>
-      <Card className="overflow-hidden hover:shadow-2xl transition-all h-full">
+      <Card className="overflow-hidden hover:shadow-xl transition-all h-full">
         <div className="relative h-64">
           <Image src={image} alt={product.name} fill className="object-cover" />
         </div>
         <div className="p-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-3">{product.name}</h3>
+          <h3 className="text-2xl font-bold text-navy mb-3">{product.name}</h3>
           <p className="text-gray-600 leading-relaxed mb-5">{product.description}</p>
           <div className="space-y-2 mb-6">
             {product.features.map((feature, fi) => (
@@ -55,7 +55,7 @@ export default function ProductsPage() {
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="badge-primary mb-4 inline-block">Our Products</span>
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-5xl font-bold text-navy mb-4">
               Medical Equipment & Supplies
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -71,11 +71,11 @@ export default function ProductsPage() {
         <section
           key={category.slug}
           id={category.slug}
-          className={catIndex % 2 === 0 ? 'py-20 bg-white' : 'py-20 diagonal-gradient'}
+          className={catIndex % 2 === 0 ? 'py-20 bg-white' : 'py-20 bg-gray-50'}
         >
           <div className="max-w-7xl mx-auto px-6">
             <motion.div {...fadeUp} className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.category}</h2>
+              <h2 className="text-3xl font-bold text-navy mb-2">{category.category}</h2>
               <p className="text-lg text-gray-600">{category.description}</p>
             </motion.div>
 
@@ -89,13 +89,13 @@ export default function ProductsPage() {
       ))}
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-primary to-sky-700 text-white">
+      <section className="py-20 diagonal-gradient-blue text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div {...fadeUp}>
-            <h2 className="text-4xl font-bold mb-6">
+            <h2 className="text-4xl font-bold mb-6 text-white">
               Can&apos;t Find What You&apos;re Looking For?
             </h2>
-            <p className="text-xl mb-8 text-sky-100">
+            <p className="text-xl mb-8 text-primary-100">
               We carry hundreds of additional products. Contact us for personalized
               recommendations and pricing.
             </p>
