@@ -1,13 +1,12 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { SiteImage } from '@/components/ui/site-image'
 import { ArrowRight, CheckCircle, Phone } from 'lucide-react'
 import { products, companyInfo } from '@/lib/data'
-import { useSiteImage } from '@/lib/image-context'
 import type { ImageSlot } from '@/lib/storage'
 
 const fadeUp = {
@@ -17,12 +16,11 @@ const fadeUp = {
 }
 
 function ProductCard({ product, index }: { product: { name: string; imageSlot: ImageSlot; description: string; features: string[] }; index: number }) {
-  const image = useSiteImage(product.imageSlot)
   return (
     <motion.div {...fadeUp} transition={{ delay: index * 0.15 }}>
       <Card className="overflow-hidden hover:shadow-xl transition-all h-full">
         <div className="relative h-64">
-          <Image src={image} alt={product.name} fill className="object-cover" />
+          <SiteImage slot={product.imageSlot} alt={product.name} fill className="object-cover" placeholderText={product.name} />
         </div>
         <div className="p-8">
           <h3 className="text-2xl font-bold text-navy mb-3">{product.name}</h3>
@@ -51,7 +49,7 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-16 diagonal-gradient">
+      <section className="pt-40 pb-16 diagonal-gradient">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="badge-primary mb-4 inline-block">Our Products</span>

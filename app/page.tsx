@@ -1,17 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { SiteImage } from '@/components/ui/site-image'
 import {
   Phone, Heart, Shield, Truck, Users,
   Award, Clock, ArrowRight, Star, FileText, Wrench,
   CheckCircle,
 } from 'lucide-react'
 import { products, services, companyInfo } from '@/lib/data'
-import { useSiteImage } from '@/lib/image-context'
 
 const iconMap: Record<string, React.ElementType> = {
   Users, Shield, FileText, Wrench, Heart, Truck,
@@ -24,15 +23,14 @@ const fadeUp = {
 }
 
 function ProductCategoryCard({ cat, index }: { cat: typeof products[number]; index: number }) {
-  const image = useSiteImage(cat.items[0].imageSlot)
   return (
     <motion.div {...fadeUp} transition={{ delay: index * 0.1 }}>
       <Link href="/products">
         <Card className="overflow-hidden hover:shadow-xl transition-all group cursor-pointer h-full">
           <div className="relative h-48">
-            <Image src={image} alt={cat.category} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4">
+            <SiteImage slot={cat.items[0].imageSlot} alt={cat.category} fill className="object-cover group-hover:scale-105 transition-transform duration-500" placeholderText={cat.category} />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent z-10" />
+            <div className="absolute bottom-4 left-4 right-4 z-20">
               <h3 className="text-white font-bold text-lg">{cat.category}</h3>
               <p className="text-white/80 text-sm">{cat.items.length} products</p>
             </div>
@@ -50,13 +48,10 @@ function ProductCategoryCard({ cat, index }: { cat: typeof products[number]; ind
 }
 
 export default function HomePage() {
-  const heroImage = useSiteImage('hero-main')
-  const whyUsImage = useSiteImage('why-us')
-
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-20 diagonal-gradient">
+      <section className="pt-40 pb-20 diagonal-gradient">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -118,14 +113,8 @@ export default function HomePage() {
               className="relative hidden lg:block"
             >
               <div className="relative h-[520px] rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                  src={heroImage}
-                  alt="Medical professional with equipment"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute bottom-8 left-8 right-8 glass rounded-2xl p-6">
+                <SiteImage slot="hero-main" alt="Medical professional with equipment" fill className="object-cover" priority placeholderText="Upload Hero Image" />
+                <div className="absolute bottom-8 left-8 right-8 glass rounded-2xl p-6 z-10">
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center">
                       <Award className="h-7 w-7 text-white" />
@@ -273,12 +262,7 @@ export default function HomePage() {
 
             <motion.div {...fadeUp} transition={{ delay: 0.2 }}>
               <div className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                  src={whyUsImage}
-                  alt="Medical supplies and equipment"
-                  fill
-                  className="object-cover"
-                />
+                <SiteImage slot="why-us" alt="Medical supplies and equipment" fill className="object-cover" placeholderText="Upload Image" />
               </div>
             </motion.div>
           </div>

@@ -1,13 +1,12 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { SiteImage } from '@/components/ui/site-image'
 import { ArrowRight, Heart, Shield, Users, Truck } from 'lucide-react'
 import { companyInfo, milestones, values } from '@/lib/data'
-import { useSiteImage } from '@/lib/image-context'
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -23,12 +22,10 @@ const valueIcons: Record<string, React.ElementType> = {
 }
 
 export default function AboutPage() {
-  const storyImage = useSiteImage('about-story')
-
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-16 diagonal-gradient">
+      <section className="pt-40 pb-16 diagonal-gradient">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="badge-primary mb-4 inline-block">About Us</span>
@@ -73,12 +70,7 @@ export default function AboutPage() {
 
             <motion.div {...fadeUp} transition={{ delay: 0.2 }}>
               <div className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                  src={storyImage}
-                  alt="Healthcare professionals"
-                  fill
-                  className="object-cover"
-                />
+                <SiteImage slot="about-story" alt="Healthcare professionals" fill className="object-cover" placeholderText="Upload About Image" />
               </div>
             </motion.div>
           </div>
