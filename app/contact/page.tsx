@@ -25,7 +25,6 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // In production, this would send to Supabase or an API
     setSubmitted(true)
   }
 
@@ -40,7 +39,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="badge-primary mb-4 inline-block">Get in Touch</span>
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-5xl font-bold text-navy mb-4">
               Contact Us
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -62,11 +61,11 @@ export default function ContactPage() {
               { icon: Clock, label: 'Business Hours', value: 'Mon–Fri: 9AM–6PM\nSat: 10AM–4PM' },
             ].map((item, i) => (
               <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }}>
-                <Card className="p-6 text-center hover:shadow-xl transition-all h-full">
-                  <div className="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Card className="p-6 text-center hover:shadow-lg transition-all h-full">
+                  <div className="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center mx-auto mb-4">
                     <item.icon className="h-7 w-7 text-primary" />
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-2">{item.label}</h3>
+                  <h3 className="font-bold text-navy mb-2">{item.label}</h3>
                   <p className="text-gray-600 text-sm whitespace-pre-line">{item.value}</p>
                 </Card>
               </motion.div>
@@ -76,13 +75,13 @@ export default function ContactPage() {
       </section>
 
       {/* Form + Map */}
-      <section className="py-20 diagonal-gradient">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Form */}
             <motion.div {...fadeUp}>
               <Card className="p-8 lg:p-10">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Send Us a Message</h2>
+                <h2 className="text-2xl font-bold text-navy mb-2">Send Us a Message</h2>
                 <p className="text-gray-600 mb-8">
                   Fill out the form below and our team will get back to you within 24 hours.
                 </p>
@@ -92,7 +91,7 @@ export default function ContactPage() {
                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                       <CheckCircle className="h-10 w-10 text-green-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+                    <h3 className="text-2xl font-bold text-navy mb-2">Message Sent!</h3>
                     <p className="text-gray-600">
                       Thank you for reaching out. A member of our team will contact you shortly.
                     </p>
@@ -104,7 +103,7 @@ export default function ContactPage() {
                   <form onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="name" className="block text-sm font-medium text-navy mb-1">
                           Full Name *
                         </label>
                         <input
@@ -114,12 +113,12 @@ export default function ContactPage() {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
                           placeholder="John Doe"
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="email" className="block text-sm font-medium text-navy mb-1">
                           Email Address *
                         </label>
                         <input
@@ -129,7 +128,7 @@ export default function ContactPage() {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
                           placeholder="john@example.com"
                         />
                       </div>
@@ -137,7 +136,7 @@ export default function ContactPage() {
 
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="phone" className="block text-sm font-medium text-navy mb-1">
                           Phone Number
                         </label>
                         <input
@@ -146,12 +145,12 @@ export default function ContactPage() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
                           placeholder="(555) 123-4567"
                         />
                       </div>
                       <div>
-                        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor="subject" className="block text-sm font-medium text-navy mb-1">
                           Subject *
                         </label>
                         <select
@@ -160,7 +159,7 @@ export default function ContactPage() {
                           required
                           value={formData.subject}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition bg-white"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition bg-white"
                         >
                           <option value="">Select a topic</option>
                           <option value="consultation">Free Consultation</option>
@@ -173,7 +172,7 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor="message" className="block text-sm font-medium text-navy mb-1">
                         Message *
                       </label>
                       <textarea
@@ -183,7 +182,7 @@ export default function ContactPage() {
                         rows={5}
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition resize-none"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition resize-none"
                         placeholder="Tell us how we can help you..."
                       />
                     </div>
@@ -217,7 +216,7 @@ export default function ContactPage() {
               </Card>
 
               <Card className="p-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Why Contact Us?</h3>
+                <h3 className="text-xl font-bold text-navy mb-6">Why Contact Us?</h3>
                 <div className="space-y-4">
                   {[
                     'Free personalized consultation with our specialists',
@@ -234,9 +233,9 @@ export default function ContactPage() {
                 </div>
               </Card>
 
-              <Card className="p-8 bg-gradient-to-br from-primary to-sky-700 text-white border-0">
-                <h3 className="text-xl font-bold mb-4">Need Immediate Help?</h3>
-                <p className="text-sky-100 mb-6">
+              <Card className="p-8 diagonal-gradient-blue text-white border-0">
+                <h3 className="text-xl font-bold mb-4 text-white">Need Immediate Help?</h3>
+                <p className="text-primary-100 mb-6">
                   Call us directly for urgent inquiries. We&apos;re available 24/7 for emergencies.
                 </p>
                 <div className="flex items-center gap-3">
@@ -244,8 +243,8 @@ export default function ContactPage() {
                     <Phone className="h-6 w-6" />
                   </div>
                   <div>
-                    <div className="font-bold text-lg">{companyInfo.phone}</div>
-                    <div className="text-sky-200 text-sm">24/7 Emergency Line</div>
+                    <div className="font-bold text-lg text-white">{companyInfo.phone}</div>
+                    <div className="text-primary-100 text-sm">24/7 Emergency Line</div>
                   </div>
                 </div>
               </Card>

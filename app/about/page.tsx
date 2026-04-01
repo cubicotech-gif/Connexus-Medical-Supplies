@@ -32,7 +32,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="badge-primary mb-4 inline-block">About Us</span>
-            <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-5xl font-bold text-navy mb-4">
               Our Story & Mission
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -48,7 +48,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeUp}>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl font-bold text-navy mb-6">
                 Who We Are
               </h2>
               <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
@@ -90,7 +90,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div {...fadeUp}>
             <span className="badge-primary mb-4 inline-block">Our Mission</span>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl font-bold text-navy mb-6">
               &ldquo;To make premium medical equipment accessible to everyone who needs it.&rdquo;
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
@@ -109,7 +109,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <motion.div {...fadeUp}>
               <span className="badge-primary mb-4 inline-block">Our Values</span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-navy mb-4">
                 What Guides Everything We Do
               </h2>
             </motion.div>
@@ -120,11 +120,11 @@ export default function AboutPage() {
               const Icon = valueIcons[value.title] || Shield
               return (
                 <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }}>
-                  <Card className="p-8 text-center hover:shadow-xl transition-all h-full">
-                    <div className="w-16 h-16 bg-sky-100 rounded-xl flex items-center justify-center mx-auto mb-5">
+                  <Card className="p-8 text-center hover:shadow-lg transition-all h-full">
+                    <div className="w-16 h-16 bg-primary-50 rounded-xl flex items-center justify-center mx-auto mb-5">
                       <Icon className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
+                    <h3 className="text-xl font-bold text-navy mb-3">{value.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{value.description}</p>
                   </Card>
                 </motion.div>
@@ -135,12 +135,12 @@ export default function AboutPage() {
       </section>
 
       {/* Milestones */}
-      <section className="py-20 diagonal-gradient">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16">
             <motion.div {...fadeUp}>
               <span className="badge-primary mb-4 inline-block">Our Journey</span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-navy mb-4">
                 Key Milestones
               </h2>
             </motion.div>
@@ -149,13 +149,13 @@ export default function AboutPage() {
           <div className="space-y-8">
             {milestones.map((milestone, i) => (
               <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }}>
-                <Card className="p-8 hover:shadow-xl transition-all">
+                <Card className="p-8 hover:shadow-lg transition-all">
                   <div className="flex flex-col sm:flex-row gap-6 items-start">
                     <div className="flex-shrink-0 w-20 h-20 bg-primary rounded-2xl flex items-center justify-center">
                       <span className="text-white font-bold text-lg">{milestone.year}</span>
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{milestone.title}</h3>
+                      <h3 className="text-xl font-bold text-navy mb-2">{milestone.title}</h3>
                       <p className="text-gray-600 leading-relaxed">{milestone.description}</p>
                     </div>
                   </div>
@@ -167,13 +167,13 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-primary to-sky-700 text-white">
+      <section className="py-20 diagonal-gradient-blue text-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div {...fadeUp}>
-            <h2 className="text-4xl font-bold mb-6">
+            <h2 className="text-4xl font-bold mb-6 text-white">
               Experience the Connexus Difference
             </h2>
-            <p className="text-xl mb-8 text-sky-100">
+            <p className="text-xl mb-8 text-primary-100">
               Let our team of specialists help you find the right medical equipment
               for your needs. Schedule a free consultation today.
             </p>

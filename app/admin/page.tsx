@@ -83,10 +83,10 @@ export default function AdminPage() {
         <div className="w-full max-w-md mx-auto px-6">
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Shield className="h-8 w-8 text-primary" />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900">Admin Panel</h1>
+              <h1 className="text-2xl font-bold text-navy">Admin Panel</h1>
               <p className="text-gray-500 mt-1">Enter your password to continue</p>
             </div>
 
@@ -115,7 +115,7 @@ export default function AdminPage() {
 
               <button
                 type="submit"
-                className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary-600 transition flex items-center justify-center gap-2"
+                className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-[#0098D6] transition flex items-center justify-center gap-2"
               >
                 <LogIn className="h-5 w-5" />
                 Sign In
@@ -139,7 +139,7 @@ export default function AdminPage() {
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-gray-900">Image Management</h1>
+          <h1 className="text-3xl font-bold text-navy">Image Management</h1>
           <p className="text-gray-600 mt-2">
             Upload and manage all images across the website. Changes appear instantly on the live site.
           </p>
@@ -161,7 +161,7 @@ export default function AdminPage() {
         {/* Image sections */}
         {Object.entries(sections).map(([sectionName, slots]) => (
           <div key={sectionName} className="mb-12">
-            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <h2 className="text-xl font-bold text-navy mb-6 flex items-center gap-2">
               <ImageIcon className="h-5 w-5 text-primary" />
               {sectionName}
             </h2>
@@ -187,7 +187,7 @@ export default function AdminPage() {
         {/* Setup instructions */}
         {!supabaseConnected && (
           <div className="bg-white rounded-2xl shadow-md p-8 mt-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Supabase Setup Instructions</h2>
+            <h2 className="text-xl font-bold text-navy mb-4">Supabase Setup Instructions</h2>
             <div className="space-y-4 text-gray-600">
               <p>To enable image uploads, configure Supabase:</p>
               <ol className="list-decimal list-inside space-y-2 ml-2">
@@ -278,7 +278,7 @@ function ImageUploadCard({
         {/* Info & actions */}
         <div className="p-4 flex-1 flex flex-col justify-between">
           <div>
-            <h3 className="font-bold text-gray-900">{slot.label}</h3>
+            <h3 className="font-bold text-navy">{slot.label}</h3>
             <p className="text-gray-500 text-xs mt-1 leading-relaxed">{slot.description}</p>
           </div>
 

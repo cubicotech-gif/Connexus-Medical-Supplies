@@ -15,9 +15,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(
           "inline-flex items-center justify-center rounded-lg font-semibold transition-all",
-          variant === 'default' && "bg-primary text-white hover:bg-primary-600 shadow-md",
+          variant === 'default' && "bg-primary text-white hover:bg-primary-600 shadow-md hover:shadow-lg",
           variant === 'outline' && "border-2 border-primary text-primary hover:bg-primary hover:text-white",
-          variant === 'secondary' && "bg-white text-primary hover:bg-gray-100",
+          variant === 'secondary' && "bg-white text-navy hover:bg-gray-50 shadow-md",
           size === 'default' && "h-11 px-8",
           size === 'sm' && "h-9 px-4 text-sm",
           size === 'lg' && "h-12 px-10 text-base",

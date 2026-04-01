@@ -31,7 +31,7 @@ function ProductCategoryCard({ cat, index }: { cat: typeof products[number]; ind
         <Card className="overflow-hidden hover:shadow-xl transition-all group cursor-pointer h-full">
           <div className="relative h-48">
             <Image src={image} alt={cat.category} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy/70 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4">
               <h3 className="text-white font-bold text-lg">{cat.category}</h3>
               <p className="text-white/80 text-sm">{cat.items.length} products</p>
@@ -69,7 +69,7 @@ export default function HomePage() {
                 Trusted Medical Equipment Supplier
               </span>
 
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-5xl lg:text-6xl font-bold text-navy leading-tight">
                 Your Trusted Partner in{' '}
                 <span className="text-primary">Quality Healthcare</span>
               </h1>
@@ -97,7 +97,7 @@ export default function HomePage() {
               <div className="flex items-center gap-4 pt-4">
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-sky-200 to-primary border-2 border-white" />
+                    <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-50 to-primary border-2 border-white" />
                   ))}
                 </div>
                 <div>
@@ -131,7 +131,7 @@ export default function HomePage() {
                       <Award className="h-7 w-7 text-white" />
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-gray-900">15+ Years</div>
+                      <div className="text-3xl font-bold text-navy">15+ Years</div>
                       <div className="text-gray-600 font-medium">Of Trusted Service</div>
                     </div>
                   </div>
@@ -147,17 +147,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { icon: Clock, number: '15+', label: 'Years Experience', color: 'bg-blue-100 text-blue-600' },
-              { icon: Heart, number: '500+', label: 'Happy Customers', color: 'bg-rose-100 text-rose-600' },
-              { icon: Award, number: '1,000+', label: 'Products Delivered', color: 'bg-amber-100 text-amber-600' },
-              { icon: Shield, number: '100%', label: 'FDA Certified', color: 'bg-emerald-100 text-emerald-600' },
+              { icon: Clock, number: '15+', label: 'Years Experience', color: 'bg-primary-50 text-primary' },
+              { icon: Heart, number: '500+', label: 'Happy Customers', color: 'bg-rose-50 text-rose-500' },
+              { icon: Award, number: '1,000+', label: 'Products Delivered', color: 'bg-amber-50 text-amber-500' },
+              { icon: Shield, number: '100%', label: 'FDA Certified', color: 'bg-emerald-50 text-emerald-500' },
             ].map((stat, i) => (
               <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }}>
-                <Card className="text-center p-8 hover:shadow-xl transition-shadow">
+                <Card className="text-center p-8 hover:shadow-lg transition-shadow">
                   <div className={`w-16 h-16 ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-4`}>
                     <stat.icon className="h-8 w-8" />
                   </div>
-                  <div className="text-3xl font-bold text-gray-900 mb-1">{stat.number}</div>
+                  <div className="text-3xl font-bold text-navy mb-1">{stat.number}</div>
                   <div className="text-gray-500 text-sm">{stat.label}</div>
                 </Card>
               </motion.div>
@@ -172,7 +172,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <motion.div {...fadeUp}>
               <span className="badge-primary mb-4 inline-block">What We Offer</span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-navy mb-4">
                 Comprehensive Healthcare Solutions
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -187,11 +187,11 @@ export default function HomePage() {
               const Icon = iconMap[service.icon] || Shield
               return (
                 <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }}>
-                  <Card className="p-8 hover:shadow-xl transition-all group h-full">
-                    <div className="w-14 h-14 bg-sky-100 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                  <Card className="p-8 hover:shadow-lg transition-all group h-full">
+                    <div className="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                       <Icon className="h-7 w-7 text-primary" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
+                    <h3 className="text-xl font-bold text-navy mb-2">{service.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{service.description}</p>
                   </Card>
                 </motion.div>
@@ -207,7 +207,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <motion.div {...fadeUp}>
               <span className="badge-primary mb-4 inline-block">Our Products</span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-navy mb-4">
                 Quality Medical Supplies You Can Trust
               </h2>
               <p className="text-xl text-gray-600">
@@ -239,7 +239,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeUp}>
               <span className="badge-primary mb-4 inline-block">Why Connexus</span>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl font-bold text-navy mb-6">
                 Making Premium Medical Equipment Accessible to Everyone
               </h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
@@ -289,11 +289,11 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div {...fadeUp}>
-            <Card className="p-12 lg:p-16 text-center border-0 shadow-2xl bg-gradient-to-br from-primary to-sky-700 text-white rounded-3xl">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <Card className="p-12 lg:p-16 text-center border-0 shadow-2xl diagonal-gradient-blue text-white rounded-3xl">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
                 Ready to Improve Your Quality of Life?
               </h2>
-              <p className="text-xl mb-8 text-sky-100 max-w-2xl mx-auto">
+              <p className="text-xl mb-8 text-primary-100 max-w-2xl mx-auto">
                 Schedule a free consultation with our medical equipment specialists.
                 We&apos;ll help you find the perfect solution for your needs.
               </p>
@@ -318,8 +318,8 @@ export default function HomePage() {
                   { num: '100%', label: 'Quality Guaranteed' },
                 ].map((s, i) => (
                   <div key={i}>
-                    <div className="text-4xl font-bold">{s.num}</div>
-                    <div className="text-sky-200 text-sm mt-1">{s.label}</div>
+                    <div className="text-4xl font-bold text-white">{s.num}</div>
+                    <div className="text-primary-100 text-sm mt-1">{s.label}</div>
                   </div>
                 ))}
               </div>

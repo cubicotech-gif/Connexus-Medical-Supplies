@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Heart, MapPin, Phone, Mail, Clock } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { companyInfo } from '@/lib/data'
 import { useSiteImage } from '@/lib/image-context'
 
@@ -10,24 +10,19 @@ export function Footer() {
   const logo = useSiteImage('logo')
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-navy text-gray-300">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
             <div className="mb-4">
               {logo ? (
-                <Image src={logo} alt="Connexus Medical" width={160} height={48} className="h-10 w-auto object-contain brightness-0 invert" />
+                <Image src={logo} alt="Connexus Medical Supplies" width={180} height={48} className="h-10 w-auto object-contain brightness-0 invert" />
               ) : (
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                    <Heart className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="font-bold text-white text-xl">Connexus</span>
-                </div>
+                <span className="font-bold text-white text-xl">Connexus Medical</span>
               )}
             </div>
-            <p className="text-sm leading-relaxed mb-6">
+            <p className="text-sm leading-relaxed text-navy-100">
               Premium medical equipment and supplies, delivered with expert care
               and personalized guidance for every patient.
             </p>
@@ -37,11 +32,11 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-4">Quick Links</h3>
             <div className="space-y-2 text-sm">
-              <div><Link href="/" className="hover:text-primary transition-colors">Home</Link></div>
-              <div><Link href="/products" className="hover:text-primary transition-colors">Our Products</Link></div>
-              <div><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></div>
-              <div><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></div>
-              <div><Link href="/contact" className="hover:text-primary transition-colors">Get a Quote</Link></div>
+              <div><Link href="/" className="text-navy-100 hover:text-primary transition-colors">Home</Link></div>
+              <div><Link href="/products" className="text-navy-100 hover:text-primary transition-colors">Our Products</Link></div>
+              <div><Link href="/about" className="text-navy-100 hover:text-primary transition-colors">About Us</Link></div>
+              <div><Link href="/contact" className="text-navy-100 hover:text-primary transition-colors">Contact Us</Link></div>
+              <div><Link href="/contact" className="text-navy-100 hover:text-primary transition-colors">Get a Quote</Link></div>
             </div>
           </div>
 
@@ -49,17 +44,17 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-4">Products</h3>
             <div className="space-y-2 text-sm">
-              <div><Link href="/products#wheelchairs" className="hover:text-primary transition-colors">Wheelchairs</Link></div>
-              <div><Link href="/products#mobility-aids" className="hover:text-primary transition-colors">Mobility Aids</Link></div>
-              <div><Link href="/products#diabetic-care" className="hover:text-primary transition-colors">Diabetic Care</Link></div>
-              <div><Link href="/products#orthopedic-braces" className="hover:text-primary transition-colors">Orthopedic Braces</Link></div>
+              <div><Link href="/products#wheelchairs" className="text-navy-100 hover:text-primary transition-colors">Wheelchairs</Link></div>
+              <div><Link href="/products#mobility-aids" className="text-navy-100 hover:text-primary transition-colors">Mobility Aids</Link></div>
+              <div><Link href="/products#diabetic-care" className="text-navy-100 hover:text-primary transition-colors">Diabetic Care</Link></div>
+              <div><Link href="/products#orthopedic-braces" className="text-navy-100 hover:text-primary transition-colors">Orthopedic Braces</Link></div>
             </div>
           </div>
 
           {/* Contact */}
           <div>
             <h3 className="font-semibold text-white mb-4">Contact Info</h3>
-            <div className="space-y-3 text-sm">
+            <div className="space-y-3 text-sm text-navy-100">
               <div className="flex gap-3">
                 <MapPin className="h-5 w-5 flex-shrink-0 text-primary mt-0.5" />
                 <span>{companyInfo.address.street}<br />{companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.zip}</span>
@@ -83,9 +78,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center text-sm">
+        <div className="border-t border-navy-400 pt-8 text-center text-sm text-navy-200">
           <p>&copy; {new Date().getFullYear()} Connexus Medical Supplies. All rights reserved.</p>
-          <p className="mt-2 text-gray-500">
+          <p className="mt-2 text-navy-300">
             Powered by{' '}
             <a
               href="https://cubicotechnologies.com"
