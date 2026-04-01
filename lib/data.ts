@@ -28,15 +28,15 @@ export const products = [
     items: [
       {
         name: 'Standard Wheelchair',
+        imageSlot: 'product-standard-wheelchair' as const,
         description: 'Built for everyday comfort and durability. Our standard wheelchair features a lightweight aluminum frame, foldable design, padded armrests, and adjustable footrests — making it ideal for home, clinic, or on-the-go use.',
         features: ['Lightweight aluminum frame', 'Foldable for easy storage', 'Padded armrests', 'Adjustable footrests', 'Durable wheel construction'],
-        image: 'https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=600&q=80',
       },
       {
         name: 'Transport Wheelchair',
+        imageSlot: 'product-transport-wheelchair' as const,
         description: 'Compact and ultra-lightweight, perfect for travel and short-distance transport. Features swing-away footrests, a compact fold, and smooth-rolling wheels for effortless mobility.',
         features: ['Ultra-lightweight design', 'Compact fold for travel', 'Swing-away footrests', 'Smooth-rolling rear wheels', 'Companion-operated brakes'],
-        image: 'https://images.unsplash.com/photo-1617575521317-d2974f3b56d2?w=600&q=80',
       },
     ],
   },
@@ -47,15 +47,15 @@ export const products = [
     items: [
       {
         name: 'Rollator Walker',
+        imageSlot: 'product-rollator-walker' as const,
         description: 'A four-wheel rollator with a built-in seat, storage basket, and ergonomic hand brakes. Provides stable support for those who need a reliable walking companion with the option to rest anytime.',
         features: ['Four-wheel stability', 'Built-in padded seat', 'Under-seat storage basket', 'Ergonomic hand brakes', 'Height-adjustable handles'],
-        image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=600&q=80',
       },
       {
         name: 'Walking Cane',
+        imageSlot: 'product-walking-cane' as const,
         description: 'Ergonomically designed for comfort and stability. Features an anti-slip rubber base, cushioned grip, and adjustable height to suit any user — a simple yet essential mobility tool.',
         features: ['Ergonomic cushioned grip', 'Anti-slip rubber base', 'Adjustable height', 'Lightweight construction', 'Stylish and durable'],
-        image: 'https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600&q=80',
       },
     ],
   },
@@ -66,15 +66,15 @@ export const products = [
     items: [
       {
         name: 'Blood Glucose Monitor',
+        imageSlot: 'product-glucose-monitor' as const,
         description: 'A digital glucose monitoring system with a large, easy-to-read display, fast 5-second results, built-in memory storage for tracking trends, and auto-coding for hassle-free testing.',
         features: ['Large digital display', 'Fast 5-second results', 'Memory storage for 500+ readings', 'Auto-coding technology', 'Compact and portable'],
-        image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80',
       },
       {
         name: 'Diabetic Supply Kit',
+        imageSlot: 'product-diabetic-kit' as const,
         description: 'Everything you need in one convenient package — testing strips, sterile lancets, and a durable carrying case. Designed for daily management on the go.',
         features: ['Testing strips included', 'Sterile lancets', 'Durable carrying case', 'Travel-friendly size', 'Compatible with major monitors'],
-        image: 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&q=80',
       },
     ],
   },
@@ -85,15 +85,15 @@ export const products = [
     items: [
       {
         name: 'Knee Brace',
+        imageSlot: 'product-knee-brace' as const,
         description: 'Hinged knee support with adjustable compression straps and breathable material. Provides stability during recovery and everyday activity without restricting natural movement.',
         features: ['Hinged bilateral support', 'Adjustable compression straps', 'Breathable mesh fabric', 'Non-slip silicone grip', 'Fits left or right knee'],
-        image: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=600&q=80',
       },
       {
         name: 'Back Support Belt',
+        imageSlot: 'product-back-support' as const,
         description: 'Lumbar support belt with dual compression bands and adjustable sizing. Relieves lower back strain and promotes proper posture during work or recovery.',
         features: ['Dual compression bands', 'Adjustable lumbar sizing', 'Breathable elastic material', 'Ergonomic contouring', 'Discreet under-clothing fit'],
-        image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80',
       },
     ],
   },

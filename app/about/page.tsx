@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ArrowRight, Heart, Shield, Users, Truck, CheckCircle } from 'lucide-react'
+import { ArrowRight, Heart, Shield, Users, Truck } from 'lucide-react'
 import { companyInfo, milestones, values } from '@/lib/data'
+import { useSiteImage } from '@/lib/image-context'
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -22,6 +23,8 @@ const valueIcons: Record<string, React.ElementType> = {
 }
 
 export default function AboutPage() {
+  const storyImage = useSiteImage('about-story')
+
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -71,7 +74,7 @@ export default function AboutPage() {
             <motion.div {...fadeUp} transition={{ delay: 0.2 }}>
               <div className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80"
+                  src={storyImage}
                   alt="Healthcare professionals"
                   fill
                   className="object-cover"

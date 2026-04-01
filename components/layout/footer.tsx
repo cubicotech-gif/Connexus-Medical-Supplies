@@ -1,19 +1,31 @@
+'use client'
+
 import Link from 'next/link'
+import Image from 'next/image'
 import { Heart, MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { companyInfo } from '@/lib/data'
+import { useSiteImage } from '@/lib/image-context'
 
 export function Footer() {
+  const logo = useSiteImage('logo')
+
   return (
     <footer className="bg-gray-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Heart className="h-5 w-5 text-white" />
-              </div>
-              <span className="font-bold text-white text-xl">Connexus</span>
+            <div className="mb-4">
+              {logo ? (
+                <Image src={logo} alt="Connexus Medical" width={160} height={48} className="h-10 w-auto object-contain brightness-0 invert" />
+              ) : (
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <Heart className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="font-bold text-white text-xl">Connexus</span>
+                </div>
+              )}
             </div>
             <p className="text-sm leading-relaxed mb-6">
               Premium medical equipment and supplies, delivered with expert care
@@ -37,10 +49,10 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-4">Products</h3>
             <div className="space-y-2 text-sm">
-              <div><Link href="/products" className="hover:text-primary transition-colors">Wheelchairs</Link></div>
-              <div><Link href="/products" className="hover:text-primary transition-colors">Mobility Aids</Link></div>
-              <div><Link href="/products" className="hover:text-primary transition-colors">Diabetic Care</Link></div>
-              <div><Link href="/products" className="hover:text-primary transition-colors">Orthopedic Braces</Link></div>
+              <div><Link href="/products#wheelchairs" className="hover:text-primary transition-colors">Wheelchairs</Link></div>
+              <div><Link href="/products#mobility-aids" className="hover:text-primary transition-colors">Mobility Aids</Link></div>
+              <div><Link href="/products#diabetic-care" className="hover:text-primary transition-colors">Diabetic Care</Link></div>
+              <div><Link href="/products#orthopedic-braces" className="hover:text-primary transition-colors">Orthopedic Braces</Link></div>
             </div>
           </div>
 

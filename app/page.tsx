@@ -11,6 +11,7 @@ import {
   CheckCircle,
 } from 'lucide-react'
 import { products, services, companyInfo } from '@/lib/data'
+import { useSiteImage } from '@/lib/image-context'
 
 const iconMap: Record<string, React.ElementType> = {
   Users, Shield, FileText, Wrench, Heart, Truck,
@@ -22,7 +23,36 @@ const fadeUp = {
   viewport: { once: true },
 }
 
+function ProductCategoryCard({ cat, index }: { cat: typeof products[number]; index: number }) {
+  const image = useSiteImage(cat.items[0].imageSlot)
+  return (
+    <motion.div {...fadeUp} transition={{ delay: index * 0.1 }}>
+      <Link href="/products">
+        <Card className="overflow-hidden hover:shadow-xl transition-all group cursor-pointer h-full">
+          <div className="relative h-48">
+            <Image src={image} alt={cat.category} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4">
+              <h3 className="text-white font-bold text-lg">{cat.category}</h3>
+              <p className="text-white/80 text-sm">{cat.items.length} products</p>
+            </div>
+          </div>
+          <div className="p-5">
+            <p className="text-gray-600 text-sm leading-relaxed">{cat.description}</p>
+            <div className="flex items-center gap-1 mt-3 text-primary font-medium text-sm">
+              View Products <ArrowRight className="h-4 w-4" />
+            </div>
+          </div>
+        </Card>
+      </Link>
+    </motion.div>
+  )
+}
+
 export default function HomePage() {
+  const heroImage = useSiteImage('hero-main')
+  const whyUsImage = useSiteImage('why-us')
+
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -89,7 +119,7 @@ export default function HomePage() {
             >
               <div className="relative h-[520px] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&q=80"
+                  src={heroImage}
                   alt="Medical professional with equipment"
                   fill
                   className="object-cover"
@@ -188,31 +218,7 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {products.map((cat, i) => (
-              <motion.div key={cat.slug} {...fadeUp} transition={{ delay: i * 0.1 }}>
-                <Link href="/products">
-                  <Card className="overflow-hidden hover:shadow-xl transition-all group cursor-pointer h-full">
-                    <div className="relative h-48">
-                      <Image
-                        src={cat.items[0].image}
-                        alt={cat.category}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <h3 className="text-white font-bold text-lg">{cat.category}</h3>
-                        <p className="text-white/80 text-sm">{cat.items.length} products</p>
-                      </div>
-                    </div>
-                    <div className="p-5">
-                      <p className="text-gray-600 text-sm leading-relaxed">{cat.description}</p>
-                      <div className="flex items-center gap-1 mt-3 text-primary font-medium text-sm">
-                        View Products <ArrowRight className="h-4 w-4" />
-                      </div>
-                    </div>
-                  </Card>
-                </Link>
-              </motion.div>
+              <ProductCategoryCard key={cat.slug} cat={cat} index={i} />
             ))}
           </div>
 
@@ -268,7 +274,7 @@ export default function HomePage() {
             <motion.div {...fadeUp} transition={{ delay: 0.2 }}>
               <div className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80"
+                  src={whyUsImage}
                   alt="Medical supplies and equipment"
                   fill
                   className="object-cover"
