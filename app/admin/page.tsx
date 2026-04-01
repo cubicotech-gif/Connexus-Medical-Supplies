@@ -137,6 +137,16 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen pt-28 pb-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6">
+        {/* Admin Nav */}
+        <div className="flex gap-3 mb-8">
+          <span className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium">
+            Image Manager
+          </span>
+          <a href="/admin/submissions" className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-navy hover:bg-gray-50 transition">
+            Contact Submissions
+          </a>
+        </div>
+
         {/* Header */}
         <div className="mb-10">
           <h1 className="text-3xl font-bold text-navy">Image Management</h1>
